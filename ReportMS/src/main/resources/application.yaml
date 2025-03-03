@@ -1,0 +1,46 @@
+spring:
+  application:
+    name:  ReportMS
+  datasource:
+    driverClassName:  com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://localhost:3306/shipshop_report
+    username:  root
+    password:  root
+  cloud:
+    consul:
+      host:  localhost
+      discovery:
+        host:  localhost
+        
+#  #Initialize chaos monkey for spring boot by profile
+#  profiles:
+#    active:  chaos-monkey
+#
+##Configure Chaos Monkey
+#chaos:
+#  monkey:
+#    enabled:  true
+#    watcher:
+#      restController:  true
+#      service:  true
+#    assaults:
+#      latencyActive:  true
+#
+##Spring boot actuator Endpoint Chaos Monkey for Spring Boot
+#management:
+#  endpoint:
+#    chaosmonkey:
+#      enabled: true
+#    chaosmonkeyjmx:
+#      enabled: true
+#
+#  endpoints:
+#    web:
+#      exposure:
+#        # include all endpoints
+#        include: "*"
+       
+    
+
+server:
+  port:   9500
