@@ -52,10 +52,3 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES CustomerOrders(order_id),  -- Foreign key constraint to the CustomerOrders table
     FOREIGN KEY (product_id) REFERENCES shipshop_product.Product(id)    -- Foreign key constraint to the Products table
 );
-
-
-
-
-
-
-

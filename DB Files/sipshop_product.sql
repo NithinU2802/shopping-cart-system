@@ -22,6 +22,3 @@ CREATE TABLE Inventory (
     last_replenishment_date TIMESTAMP,                -- Last date when the stock was replenished
     FOREIGN KEY (product_id) REFERENCES Product(id)  -- Foreign key constraint to ensure valid product_id
 );
-
-
-
