@@ -1,5 +1,6 @@
 package com.infy.billing.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import com.infy.billing.service.BillingService;
 @RequestMapping("/billing")
 public class BillingController {
 	
+	@Autowired
 	BillingService billingService;
 	
 	public BillingController(BillingService billingService) {
