@@ -2,6 +2,9 @@ package com.infy.product.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.Data;
+
+@Data
 public class InventoryDto {
 
 	Long id;
@@ -11,4 +14,5 @@ public class InventoryDto {
 	Integer quantityInStock;
 	Integer quantitySold;
 	LocalDateTime lastReplenishmentDate;
+
 }
