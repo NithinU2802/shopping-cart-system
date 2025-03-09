@@ -32,6 +32,12 @@ CREATE TABLE Coupon (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP  -- Timestamp for last update
 );
 
+insert into Coupon(id, code, discount_percentage,valid_until) values
+(1,'XVMKL231KZI',10.0,'2025-03-12 12:00:00'),
+(2,'WDJFOHW42DH',12.0,'2025-03-14 12:00:00'),
+(3,'FHWEI234FHE',8.0,'2025-03-16 12:00:00');
+
+
 
 CREATE TABLE CustomerOrders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,            -- Auto-incrementing primary key for the order
@@ -54,8 +60,12 @@ CREATE TABLE OrderItems (
 );
 
 
+select * from customerOrders;
 
+select * from orderitems;
 
+select * from coupon;
 
-
-
+SELECT SUM(total_amount) AS total_sales
+FROM CustomerOrders
+WHERE order_date >= NOW() - INTERVAL 300 MINUTE;

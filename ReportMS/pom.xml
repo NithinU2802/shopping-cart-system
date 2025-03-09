@@ -29,20 +29,147 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
 		<log4j.version>2.19.0</log4j.version>
+		
+
+		<!-- project key and name should be same and in the format:
+        batchname-groupno-projectname -->
+		<sonar.projectKey>Sep24-SP1-L1-Java-React-group19-icinema</sonar.projectKey> <!-- Unique key -->
+		<sonar.projectName>Sep24-SP1-L1-Java-React-group19-icinema</sonar.projectName>
+		<sonar.coverage.exclusions>
+			src/main/java/com/icinema/movie/exception/**,
+			src/main/java/com/icinema/movie/entity/**,
+			src/main/java/com/icinema/movie/dto/**,
+			src/main/java/com/icinema/movie/security/**,
+			src/main/java/com/icinema/movie/utility/**,
+			src/main/java/com/icinema/movie/controller/**,
+			src/main/java/com/icinema/movie/Application*,
+			src/main/java/com/icinema/movie/repository/**
+		</sonar.coverage.exclusions>
+
+		<!--The below 2 lines ensures build fails if quality gate status fails-->
+		<sonar.qualitygate.wait>true</sonar.qualitygate.wait>
+		<sonar.qualitygate.failOnSonarQubeExitCode>true</sonar.qualitygate.failOnSonarQubeExitCode>
+
+		<sonar.sources>${project.basedir}\src\main\java</sonar.sources>
+		<sonar.tests>${project.basedir}\src\test\java</sonar.tests>
+		<sonar.java.binaries>${project.basedir}\target\classes</sonar.java.binaries>
+
+		<sonar.junit.reportsPath>${project.basedir}\target\surefire-reports</sonar.junit.reportsPath>
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.coverage.jacoco.xmlReportPaths>
+			${project.basedir}/target/jacoco-ut/jacoco.xml
+		</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 	
 	<build>
+		<finalName>icinema-movie</finalName>
 		<plugins>
 			<!-- used to package and run Spring Boot applications-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+			<!--used to execute unit tests -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<failIfNoTests>true</failIfNoTests>
+					<testFailureIgnore>true</testFailureIgnore>
+				</configuration>
+			</plugin>
+
+			<!-- PMD plugin -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.22.0</version>
+				<configuration>
+					<excludes></excludes>
+					<rulesets>
+						<ruleset>${project.basedir}/RuleSet.xml</ruleset>
+					</rulesets>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Code Coverage Plugin -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.11</version>
+				<configuration>
+					<excludes>
+						<exclude>com/icinema/movie/controller/**</exclude>
+						<exclude>com/icinema/movie/utility/**</exclude>
+						<exclude>com/icinema/movie/dto/**</exclude>
+						<exclude>com/icinema/movie/entity/**</exclude>
+						<exclude>com/icinema/moviey/exception/**</exclude>
+						<exclude>com/icinema/movie/security/**</exclude>
+						<exclude>com/icinema/movie/repository/**</exclude>
+						<exclude>com/icinema/movie/Application*</exclude>
+					</excludes>
+				</configuration>
+				<executions>
+				<!-- configures the agent for collecting test execution data -->
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					
+					<!-- generates the code coverage report during the "verify" phase of the build lifecycle. -->
+					<execution>
+						<id>report</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					
+					<!-- sets up coverage check rules, in this case, ensuring a minimum coverage of 80%. -->
+					<execution>
+						<id>coverage-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<rule>
+									<element>CLASS</element>
+									<limits>
+										<limit>
+											<counter>LINE</counter>
+											<value>COVEREDRATIO</value>
+											<minimum>0.8</minimum>
+										</limit>
+									</limits>
+								</rule>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Sonar plugin -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>4.0.0.4121</version>
+			</plugin>
 		</plugins>
 	</build>
 
 
-	<!-- <dependencyManagement>
+	<dependencyManagement>
 		<dependencies>
 			
 			<dependency>
@@ -53,7 +180,7 @@
 				<scope>import</scope>
 			</dependency>
 		</dependencies>
-	</dependencyManagement> -->
+	</dependencyManagement>
 	
 	<dependencies>
 		
@@ -74,16 +201,16 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.11</version>
-		</dependency> -->
+		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency> -->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -113,17 +240,17 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
-		</dependency -->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
 		
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-loadbalancer</artifactId>
 
@@ -132,7 +259,7 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
-		</dependency> -->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.modelmapper</groupId>

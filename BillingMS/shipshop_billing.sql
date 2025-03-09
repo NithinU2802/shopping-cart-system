@@ -13,3 +13,10 @@ CREATE TABLE Billing (
     FOREIGN KEY (order_id) REFERENCES shipshop_order.CustomerOrders(order_id),  -- Foreign key constraint to the CustomerOrders table
     FOREIGN KEY (coupon_id) REFERENCES shipshop_order.Coupon(id)         -- Foreign key constraint to the Coupon table (nullable)
 );
+
+alter table billing drop column discount;
+
+desc billing;
+
+select * from billing;
+

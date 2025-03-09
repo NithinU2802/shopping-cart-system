@@ -15,7 +15,7 @@ public class Billing {
 	Integer billingId;
 	
 	Integer orderId;
-	Double discount;
+	//Double discount;
 	Double finalAmount;
 	String paymentMethod;
 	String paymentStatus;
