@@ -1,7 +1,5 @@
 package com.infy.product.service;
 
-
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,9 +20,9 @@ import jakarta.transaction.Transactional;
 @Service
 public class ProductServiceImpl implements ProductService {
 	
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 	
-	InventoryRepository inventoryRepository;
+	private InventoryRepository inventoryRepository;
 	
 	private ModelMapper modelMapper;
 	
