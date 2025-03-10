@@ -7,10 +7,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
-=======
 import com.infy.product.dto.InventoryDto;
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 import com.infy.product.dto.ProductDto;
 import com.infy.product.entity.Inventory;
 import com.infy.product.entity.Product;
@@ -36,8 +33,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductDto
-	isProductAvailable(Long productId, Integer quantityRequired) throws ProductException {
+	public ProductDto isProductAvailable(Long productId, Integer quantityRequired) throws ProductException {
 		Optional<Product> productOpt = productRepository.findById(productId);
 		if(productOpt.isEmpty()) {
 			throw new ProductException("No Product found with given Id");
@@ -53,8 +49,6 @@ public class ProductServiceImpl implements ProductService {
 		
 	}
 
-	@Override
-<<<<<<< HEAD
 	@Transactional
 	public String modifyProductQuantity(Long productId, Integer quantity, String mode) throws ProductException {
 		Optional<Inventory> inventOpt = inventoryRepository.findByProductId(productId);
@@ -71,7 +65,6 @@ public class ProductServiceImpl implements ProductService {
 		inventoryRepository.save(inventory);
 		return "success";
 	}
-=======
 	public String addProduct(ProductDto productDTO) {
         Product product = modelMapper.map(productDTO, Product.class);
         Product savedProduct = productRepository.save(product);
@@ -83,7 +76,6 @@ public class ProductServiceImpl implements ProductService {
         modelMapper.map(savedProduct, ProductDto.class);
         return "Product Added Successfully";
     }
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 	
 	
 	public ProductDto getProduct(Long productId) throws ProductException{

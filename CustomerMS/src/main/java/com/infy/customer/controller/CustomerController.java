@@ -10,13 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
-=======
 import com.infy.customer.dto.CustomerDto;
-import com.infy.customer.entity.Customer;
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 import com.infy.customer.exception.CustomerException;
 import com.infy.customer.service.CustomerService;
+
 
 @RestController
 @RequestMapping("/customer")

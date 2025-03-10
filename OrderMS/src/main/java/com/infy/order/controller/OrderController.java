@@ -81,7 +81,7 @@ public class OrderController {
 		int index = 0;
 		for(SelectedItem item : cart.getSelectedItems()) {
 			Orderitems orderItem = new Orderitems();
-			orderItem.setOrderId(orderId);
+			orderItem.setOrderItemId(orderId);
 			orderItem.setPrice(productDtoList.get(index).getPrice() * item.getQuantity());
 			orderItem.setProductId(item.getProductId());
 			orderItem.setQuantity(item.getQuantity());

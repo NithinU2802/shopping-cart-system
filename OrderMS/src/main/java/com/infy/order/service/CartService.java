@@ -1,8 +1,5 @@
 package com.infy.order.service;
 
-import java.util.List;
-
-import org.springframework.stereotype.Service;
 
 import com.infy.order.dto.CartDto;
 import com.infy.order.exception.CartException;

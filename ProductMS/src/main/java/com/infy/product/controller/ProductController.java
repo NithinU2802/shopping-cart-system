@@ -6,24 +6,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.PutMapping;
-=======
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infy.product.dto.ProductDto;
-<<<<<<< HEAD
-
-=======
-import com.infy.product.entity.Product;
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 import com.infy.product.exception.ProductException;
 import com.infy.product.service.ProductService;
+
 
 @RestController
 @RequestMapping("/product")

@@ -1,7 +1,5 @@
 package com.infy.order.entity;
 
-import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,15 +13,15 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "OrderItems")
-public class OrderItem {
+public class Orderitems {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderItemId;
+    private Integer orderItemId;
     
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    private CustomerOrder order;
+    private Customerorders order;
     
     @Column(name = "product_id", nullable = false)
     private Long productId;
@@ -32,6 +30,6 @@ public class OrderItem {
     private int quantity;
     
     @Column(nullable = false)
-    private BigDecimal price;
+    private Double price;
     
 }

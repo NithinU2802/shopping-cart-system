@@ -9,10 +9,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.infy.order.entity.CustomerOrder;
+import com.infy.order.entity.Customerorders;
 
 @Repository
-public interface OrderRepository extends CrudRepository<CustomerOrder, Integer> {
+public interface OrderRepository extends CrudRepository<Customerorders, Integer> {
 //	@Query("SELECT o.customerId, SUM(o.totalAmount) as totalSpent " +
 //	           "FROM CustomerOrder o WHERE o.orderDate >= :startDate " +
 //	           "GROUP BY o.customerId ORDER BY totalSpent DESC")

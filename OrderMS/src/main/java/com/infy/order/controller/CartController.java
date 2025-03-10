@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.infy.order.dto.CartDto;
-import com.infy.order.entity.OrderItem;
+import com.infy.order.entity.Orderitems;
 import com.infy.order.exception.CartException;
 import com.infy.order.service.CartService;
 
@@ -35,7 +35,7 @@ public class CartController {
 	// Add item to the cart
 	@PostMapping("/{customerId}/item")
     public ResponseEntity<String> addItem(@PathVariable Long customerId,
-                                        @RequestBody OrderItem orderItem) throws CartException {
+                                        @RequestBody Orderitems orderItem) throws CartException {
         String response = cartService.addItem(customerId, orderItem.getProductId(), orderItem.getQuantity());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

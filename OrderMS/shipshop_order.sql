@@ -58,7 +58,6 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES CustomerOrders(order_id),  -- Foreign key constraint to the CustomerOrders table
     FOREIGN KEY (product_id) REFERENCES shipshop_product.Product(id)    -- Foreign key constraint to the Products table
 );
-<<<<<<< HEAD
 
 
 select * from customerOrders;
@@ -70,5 +69,3 @@ select * from coupon;
 SELECT SUM(total_amount) AS total_sales
 FROM CustomerOrders
 WHERE order_date >= NOW() - INTERVAL 300 MINUTE;
-=======
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0

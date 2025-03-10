@@ -12,17 +12,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
 @Data
 @Table(name = "CustomerOrders")
-public class CustomerOrder {
+public class Customerorders {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Integer orderId;
     
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
@@ -31,13 +30,13 @@ public class CustomerOrder {
     private LocalDateTime orderDate;
     
     @Column(name = "total_amount", nullable = false)
-    private BigDecimal totalAmount;
+    private Double totalAmount;
     
     @Column(name = "order_status", nullable = false)
     private String orderStatus;
     
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<OrderItem> orderItems;
+    private List<Orderitems> orderItems;
     
 }
 
