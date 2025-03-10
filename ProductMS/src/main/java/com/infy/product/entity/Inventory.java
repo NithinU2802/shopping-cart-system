@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PreUpdate;
 import lombok.Data;
 
 @Entity
@@ -21,7 +22,10 @@ public class Inventory {
 	Integer quantitySold;
 	LocalDateTime lastReplenishmentDate;
 	
-	
+	@PreUpdate
+    protected void onUpdate() {
+		lastReplenishmentDate = LocalDateTime.now();
+    }
 	
 	
 }

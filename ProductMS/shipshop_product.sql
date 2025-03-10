@@ -26,6 +26,7 @@ CREATE TABLE Inventory (
     last_replenishment_date TIMESTAMP,                -- Last date when the stock was replenished
     FOREIGN KEY (product_id) REFERENCES Product(id)  -- Foreign key constraint to ensure valid product_id
 );
+<<<<<<< HEAD:ProductMS/sipshop_product.sql
 
 INSERT INTO Inventory (id, product_id, quantity_in_stock, quantity_sold, last_replenishment_date)
 VALUES
@@ -35,3 +36,5 @@ VALUES
 select * from inventory;
 
 
+=======
+>>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0:ProductMS/shipshop_product.sql

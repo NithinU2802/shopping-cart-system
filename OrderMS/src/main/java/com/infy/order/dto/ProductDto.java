@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import lombok.Data;
 
+
 @Data
 public class ProductDto {
 
@@ -16,4 +17,5 @@ public class ProductDto {
 	Double price;
 	LocalDateTime createdAt;
 	LocalDateTime updatedAt;
+
 }

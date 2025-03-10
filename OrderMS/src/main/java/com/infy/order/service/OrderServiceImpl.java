@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import com.infy.order.entity.Coupon;
 import com.infy.order.entity.Customerorders;
 import com.infy.order.entity.Orderitems;
@@ -18,14 +19,21 @@ import com.infy.order.utility.NewBillUtil;
 import com.infy.order.utility.Order;
 
 import jakarta.transaction.Transactional;
+=======
+>>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
-	OrderitemsRepository orderitemsRepository;
-	CustomerordersRepository customerordersRepository;
-	CouponRepository couponRepository;
+//	@Autowired
+//	private OrderitemRepository orderitemsRepository;
+//	@Autowired
+//	private OrderRepository customerordersRepository;
+//	@Autowired
+//	private CouponRepository couponRepository;
 	
+	
+<<<<<<< HEAD
 	public OrderServiceImpl(OrderitemsRepository orderitemsRepository, CustomerordersRepository customerordersRepository, CouponRepository couponRepository) {
 		this.couponRepository = couponRepository;
 		this.customerordersRepository = customerordersRepository;
@@ -98,6 +106,8 @@ public class OrderServiceImpl implements OrderService {
 		}
 		return sales;
 	}
+=======
+>>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 }
 
 
