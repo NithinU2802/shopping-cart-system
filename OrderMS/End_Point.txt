@@ -1,0 +1,44 @@
+POST --> http://localhost:8400/order/createCart
+
+body structure:
+
+{
+    "customerId" : 1,
+    "selectedItems" : [
+        {
+
+            "productId" : 1001,
+            "quantity" : 10
+         },
+         {
+
+            "productId" : 1002,
+            "quantity" : 2
+         }
+    ]
+}
+
+
+
+
+POST --> http://localhost:8400/order/new
+
+body structure:
+
+{
+    "customerId" : 1,
+    "coupon" : "FHWEI234FHE"
+}
+
+
+
+GET --> http://localhost:8400/order/daysale
+
+--> get today sale
+
+
+
+
+GET --> http://localhost:8400/order/getsales/{time in minutes}
+
+--> get sales in last X minutes

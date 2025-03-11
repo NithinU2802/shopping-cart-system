@@ -1,19 +1,18 @@
 package com.infy.order.dto;
 
+
 import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
-public class ProductDto {
-
+public class CustomerDto {
 	Long id;
 	
 	String name;
-	String category;
-	String manufacturer;
-	String useCase;
-	Double price;
+	String email;
+	String phoneNumber;
+	String address;
 	LocalDateTime createdAt;
 	LocalDateTime updatedAt;
 }
