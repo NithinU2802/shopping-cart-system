@@ -1,6 +1,0 @@
-GET --> http://localhost:8200/customer/valid/{customerId}
-
-returns true object if valid
-else, throws exception.
-
-
