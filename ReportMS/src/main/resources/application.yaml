@@ -1,16 +1,16 @@
 spring:
   application:
     name:  ReportMS
-#  datasource:
-#    driverClassName:  com.mysql.cj.jdbc.Driver
-#    url:  jdbc:mysql://localhost:3306/shipshop_report
-#    username:  root
-#    password:  root
-#  cloud:
-#    consul:
-#      host:  localhost
-#      discovery:
-#        host:  localhost
+  datasource:
+    driverClassName:  com.mysql.cj.jdbc.Driver
+    url:  jdbc:mysql://localhost:3306/shipshop_report
+    username:  root
+    password:  root
+  cloud:
+    consul:
+      host:  localhost
+      discovery:
+        host:  localhost
         
 #  #Initialize chaos monkey for spring boot by profile
 #  profiles:

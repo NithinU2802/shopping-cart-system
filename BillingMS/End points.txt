@@ -1,0 +1,13 @@
+POST --> http://localhost:9400/billing/new 
+
+body structure example:
+
+{
+    "orderId" : 2,
+    "couponId" : 1,
+    "finalAmount" : 4000.0,
+    "paymentMethod" : "DB",
+    "paymentStatus" : "PENDING"
+}
+
+Note:- above api will be internally called from order. (No need of external calling)

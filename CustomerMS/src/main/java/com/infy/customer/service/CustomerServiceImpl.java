@@ -13,6 +13,7 @@ import com.infy.customer.entity.Customer;
 import com.infy.customer.exception.CustomerException;
 import com.infy.customer.repository.CustomerRepository;
 
+
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
@@ -71,7 +72,5 @@ public class CustomerServiceImpl implements CustomerService {
             throw new CustomerException("Customer not found with id: " + customerId);
         }
     }
-	
-	
 	
 }

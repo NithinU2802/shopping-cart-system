@@ -13,6 +13,10 @@ CREATE TABLE Product (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for last update
 );
 
+insert into Product(id,name,category,manufacturer,use_case,price)
+values(1001,'product1','cat1','manu1','usc1',1025.21),
+(1002,'product2','cat2','manu1','usc2',2999.10);
+
 
 CREATE TABLE Inventory (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,             -- Auto-incrementing primary key
@@ -22,3 +26,15 @@ CREATE TABLE Inventory (
     last_replenishment_date TIMESTAMP,                -- Last date when the stock was replenished
     FOREIGN KEY (product_id) REFERENCES Product(id)  -- Foreign key constraint to ensure valid product_id
 );
+<<<<<<< HEAD:ProductMS/sipshop_product.sql
+
+INSERT INTO Inventory (id, product_id, quantity_in_stock, quantity_sold, last_replenishment_date)
+VALUES
+(1,1001, 100, 0, '2025-03-01 10:00:00'),  
+(2, 1002, 50, 10, '2025-03-02 12:30:00'); 
+
+select * from inventory;
+
+
+=======
+>>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0:ProductMS/shipshop_product.sql

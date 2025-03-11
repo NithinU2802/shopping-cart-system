@@ -11,3 +11,7 @@ CREATE TABLE Customer (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,   -- Timestamp of when the customer was created
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for last update
 );
+
+ insert into customer(id,name,email,phone_number,address) values(1,"JohnTheDon","john420@mp.com","420420","FurfuriNagar");
+
+select * from customer;

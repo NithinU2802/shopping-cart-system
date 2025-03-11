@@ -8,7 +8,7 @@ public class BillingDto {
 	Integer billingId;
 	
 	CustomerordersDto customerOrderstDto;
-	Double discount;
+	//Double discount;
 	Double finalAmount;
 	String paymentMethod;
 	String paymentStatus;
