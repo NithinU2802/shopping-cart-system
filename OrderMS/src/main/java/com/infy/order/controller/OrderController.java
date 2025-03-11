@@ -39,9 +39,14 @@ public class OrderController {
 		this.webClientBuilder = webClientBuilder;
 	}
 
-	@GetMapping("/")
-	public ResponseEntity<String> get(){
-		return new ResponseEntity<>("Success",HttpStatus.OK);
+	// @GetMapping("/")
+	// public ResponseEntity<String> get(){
+	// 	return new ResponseEntity<>("Success",HttpStatus.OK);
+	// }
+
+	@GetMapping("/getCounter")
+	public ResponseEntity<Integer> getCounter(){
+		return new ResponseEntity<>(orderService.getCounter(),HttpStatus.OK);
 	}
 	
 	@PostMapping("/createCart")

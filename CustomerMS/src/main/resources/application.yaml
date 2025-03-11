@@ -11,6 +11,8 @@ spring:
       host:  localhost
       discovery:
         host:  localhost
+  aop:
+    proxy-target-class: true 
         
 #  #Initialize chaos monkey for spring boot by profile
 #  profiles:
