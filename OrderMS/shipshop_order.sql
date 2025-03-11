@@ -1,27 +1,27 @@
 create database shipshop_order;
 
-USE shipshop_order;
+use shipshop_order;
 
--- Create a Cart table to hold customer cart information
-CREATE TABLE Cart (
-    cart_id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_id BIGINT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
+-- CREATE TABLE Cart (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,             -- Auto-incrementing primary key for the cart
+--     customer_id BIGINT NOT NULL,                       -- Foreign key referencing the customer table
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,    -- Timestamp for when the cart was created
+--     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Timestamp for last update
+--     total_price DECIMAL(10, 2) NOT NULL,               -- Total price of the cart (calculated)
+--     FOREIGN KEY (customer_id) REFERENCES shipshop_customer.Customer(id) -- Foreign key constraint referencing Customer table
+-- );
 
--- Create a CartItem table to store individual items added to a cart
-CREATE TABLE cart_item (
-    cart_item_id INT AUTO_INCREMENT PRIMARY KEY,
-    cart_id INT NOT NULL,
-    product_id BIGINT NOT NULL,
-    quantity INT NOT NULL,
-    unit_price DECIMAL(10, 2) NOT NULL,
-    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (cart_id) REFERENCES Cart(cart_id),
-    FOREIGN KEY (product_id) REFERENCES shipshop_product.Product(id)
-);
 
+
+-- CREATE TABLE OrderItem (
+--     id BIGINT AUTO_INCREMENT PRIMARY KEY,             -- Auto-incrementing primary key for the order item
+--     cart_id BIGINT NOT NULL,                           -- Foreign key referencing the cart table
+--     product_id BIGINT NOT NULL,                        -- Foreign key referencing the product table
+--     quantity INT NOT NULL,                             -- Quantity of the product in the cart
+--     price_per_unit DECIMAL(10, 2) NOT NULL,            -- Price per unit of the product at the time of adding to the cart
+--     FOREIGN KEY (cart_id) REFERENCES Cart(id),        -- Foreign key constraint referencing the Cart table
+--     FOREIGN KEY (product_id) REFERENCES shipshop_product.Product(id)   -- Foreign key constraint referencing the Product table
+-- );
 
 CREATE TABLE Coupon (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,             -- Auto-incrementing primary key for the coupon
@@ -58,7 +58,6 @@ CREATE TABLE OrderItems (
     FOREIGN KEY (order_id) REFERENCES CustomerOrders(order_id),  -- Foreign key constraint to the CustomerOrders table
     FOREIGN KEY (product_id) REFERENCES shipshop_product.Product(id)    -- Foreign key constraint to the Products table
 );
-<<<<<<< HEAD
 
 
 select * from customerOrders;
@@ -70,5 +69,3 @@ select * from coupon;
 SELECT SUM(total_amount) AS total_sales
 FROM CustomerOrders
 WHERE order_date >= NOW() - INTERVAL 300 MINUTE;
-=======
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0

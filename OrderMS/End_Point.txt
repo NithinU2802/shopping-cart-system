@@ -42,4 +42,3 @@ GET --> http://localhost:8400/order/daysale
 GET --> http://localhost:8400/order/getsales/{time in minutes}
 
 --> get sales in last X minutes
-

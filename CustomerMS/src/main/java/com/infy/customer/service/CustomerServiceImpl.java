@@ -1,11 +1,14 @@
 package com.infy.customer.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.infy.customer.dto.CustomerDto;
 import com.infy.customer.entity.Customer;
 import com.infy.customer.exception.CustomerException;
 import com.infy.customer.repository.CustomerRepository;
@@ -28,8 +31,6 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return true;
 	}
-<<<<<<< HEAD
-=======
 	
 	public String createCustomer(CustomerDto customerDto) {
 		Customer customer = modelMapper.map(customerDto, Customer.class);
@@ -72,7 +73,4 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 	
-	
-	
->>>>>>> b08376a0ad5be0afbab1165c696d09322964bfe0
 }

@@ -5,7 +5,13 @@ import java.util.List;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,23 +33,33 @@ import com.infy.order.utility.NewBillUtil;
 import com.infy.order.utility.Order;
 import com.infy.order.utility.SelectedItem;
 
+import lombok.extern.log4j.Log4j2;
+
+
 @RestController
 @RequestMapping("/order")
+@Log4j2
 public class OrderController {
 	
 	OrderService orderService;
 	WebClient.Builder webClientBuilder;
+	
+	Logger logger = LoggerFactory.getLogger(OrderController.class);
+	
 	
 	public OrderController(OrderService orderService, WebClient.Builder webClientBuilder){
 		this.orderService = orderService;
 		this.webClientBuilder = webClientBuilder;
 	}
 
-	// @GetMapping("/")
-	// public ResponseEntity<String> get(){
-	// 	return new ResponseEntity<>("Success",HttpStatus.OK);
-	// }
-
+	@GetMapping("/greeting")
+	public ResponseEntity<String> greet(){
+		String requestId = MDC.get("requestId");
+		logger.info("Starting greeting method");
+		log.info("Starting greeting method");
+		return new ResponseEntity<>("Greetings to "+ requestId,HttpStatus.OK);
+	}
+	
 	@GetMapping("/getCounter")
 	public ResponseEntity<Integer> getCounter(){
 		return new ResponseEntity<>(orderService.getCounter(),HttpStatus.OK);
