@@ -2,11 +2,18 @@ package com.infy.order.service;
 
 
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.infy.order.dto.CustomerordersDto;
 import com.infy.order.entity.Coupon;
 import com.infy.order.entity.Customerorders;
 import com.infy.order.entity.Orderitems;
@@ -114,6 +121,46 @@ public class OrderServiceImpl implements OrderService {
 			return 0.0;
 		}
 		return sales;
+	}
+
+	@Override
+    public String getTopCustomerByOrderValue(int minutes) throws OrderException{
+		
+		LocalDateTime endTime = LocalDateTime.now();
+        LocalDateTime startTime = endTime.minus(minutes, ChronoUnit.MINUTES);
+
+        List<Customerorders> customerOrders = customerordersRepository.findByOrderDateBetween(startTime, endTime);
+
+        Map<Long, Double> customerOrderTotalMap = new HashMap<>();
+        
+        for (Customerorders order : customerOrders)
+        	customerOrderTotalMap.put(
+        		    order.getCustomerId(),
+        		    customerOrderTotalMap.getOrDefault(order.getCustomerId(), 0.0) + order.getTotalAmount()
+        		);
+        
+        double max=-1;
+        long customerId=0;
+        
+        for (Map.Entry<Long, Double> entry : customerOrderTotalMap.entrySet()) {
+        	if(max<entry.getValue()) {
+        		customerId=entry.getKey();
+        		max=entry.getValue();
+        	}
+        }
+        
+        if(max==-1)
+        	throw new OrderException("No order found in the give time period range");
+        
+        return "Customer "+customerId+" purchased with maximum order value of "+max+" in last "+minutes+" minutes";
+    }
+
+	@Override
+	public boolean checkAvailability(long customerId) {
+		Optional<Customerorders> optional = customerordersRepository.findByCustomerId(customerId);
+		if(!optional.isPresent())
+			return false;
+		return true;
 	}
 }
 

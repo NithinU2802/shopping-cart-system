@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
-
+import com.infy.order.dto.CustomerordersDto;
 import com.infy.order.dto.ProductDto;
 import com.infy.order.entity.Customerorders;
 import com.infy.order.entity.Orderitems;
@@ -73,6 +73,9 @@ public class OrderController {
 		if(!isCustomerValid) {
 			throw new OrderException("Customer Id is Invalid");
 		}
+		
+		if(orderService.checkAvailability(cart.getCustomerId()))
+			throw new OrderException("Cart is already available with customer id "+cart.getCustomerId());
 		
 		List<ProductDto> productDtoList = new ArrayList<>();
 		Double totalPrice = 0.0;
@@ -152,6 +155,11 @@ public class OrderController {
 	public ResponseEntity<Double> daySaleValue() throws OrderException{
 		return new ResponseEntity<>(orderService.daySaleValue(), HttpStatus.OK);
 	}
+	
+	@GetMapping("/topcustomer/{timeInMinutes}")
+    public ResponseEntity<String> getTopCustomerOrder(@PathVariable int timeInMinutes) throws OrderException{
+        return new ResponseEntity<>(orderService.getTopCustomerByOrderValue(timeInMinutes),HttpStatus.OK);
+    }
 	
 	@GetMapping("/getsales/{timeInMinutes}")
 	public ResponseEntity<Double> getSales(@PathVariable Integer timeInMinutes) throws OrderException{

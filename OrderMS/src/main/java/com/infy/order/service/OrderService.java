@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
+import com.infy.order.dto.CustomerordersDto;
 import com.infy.order.entity.Customerorders;
 import com.infy.order.entity.Orderitems;
 import com.infy.order.exception.OrderException;
@@ -26,5 +27,9 @@ public interface OrderService {
 	Double getSales(Integer timeInMinutes) throws OrderException;
 
 	Integer getCounter();
+	
+	boolean checkAvailability(long customerId);
+	
+	String getTopCustomerByOrderValue(int timeInMinutes) throws OrderException;
 
 }
