@@ -12,12 +12,12 @@ import com.infy.order.entity.Customerorders;
 public interface CustomerordersRepository extends CrudRepository<Customerorders, Integer> {
 
 	Optional<Customerorders> findByCustomerId(Long customerId);
-	
+
 	List<Customerorders> findByOrderDateBetween(LocalDateTime startTime, LocalDateTime endTime);
 
 	@Query("SELECT SUM(C.totalAmount) from Customerorders C where DATE(C.orderDate) = CURDATE()")
 	Double totalDailySale();
-	
+
 	@Query(value = "SELECT SUM(C.total_amount) FROM CustomerOrders C WHERE C.order_date >= (NOW() - INTERVAL ?1 MINUTE)", nativeQuery = true)
 	Double getSalesForMinutes(Integer timeInMinutes);
 

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.infy.product.dto.InventoryReplenishmentDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -131,6 +132,11 @@ public class ProductServiceImpl implements ProductService {
         dto.setQuantityInStock(inventory.getQuantityInStock());
         dto.setQuantitySold(inventory.getQuantitySold());
         return dto;
+    }
+
+    @Override
+    public List<InventoryReplenishmentDTO> getProductsToBeReplenished() throws ProductException {
+        return inventoryRepository.getProductsToBeReplenished();
     }
 	
 }

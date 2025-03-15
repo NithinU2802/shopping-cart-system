@@ -20,6 +20,7 @@ public class Inventory {
 	
 	Integer quantityInStock;
 	Integer quantitySold;
+	Integer repThreshold;
 	LocalDateTime lastReplenishmentDate;
 	
 	@PreUpdate

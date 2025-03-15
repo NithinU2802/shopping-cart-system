@@ -13,6 +13,7 @@ public class InventoryDto {
 	
 	Integer quantityInStock;
 	Integer quantitySold;
+	Integer repThreshold;
 	LocalDateTime lastReplenishmentDate;
 
 }

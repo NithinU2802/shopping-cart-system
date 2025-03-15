@@ -2,6 +2,7 @@ package com.infy.product.service;
 
 
 
+import com.infy.product.dto.InventoryReplenishmentDTO;
 import com.infy.product.dto.ProductDto;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ProductService {
 	public List<ProductDto> getAllProducts();
 	public InventoryDto getInventory(Long productId) throws ProductException;
 	public InventoryDto updateInventory(Long productId, InventoryDto updateDTO) throws ProductException;
+
+	List<InventoryReplenishmentDTO> getProductsToBeReplenished() throws ProductException;
 }
