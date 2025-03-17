@@ -61,6 +61,13 @@ public class OrderController {
 
 		return new ResponseEntity<>("Greetings to "+ requestId,HttpStatus.OK);
 	}
+	
+	
+	@GetMapping("/{orderId}")
+	public ResponseEntity<CustomerordersDto> getProductsByOrderId( @PathVariable Integer orderId) throws OrderException, InterruptedException{
+		return new ResponseEntity<>(orderService.getOrderDetailByOrderId(orderId),HttpStatus.OK);
+	}
+	
 
 	@GetMapping("/getCounter")
 	public ResponseEntity<Integer> getCounter(){

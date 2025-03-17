@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties.Jetty.Threads;
 import org.springframework.stereotype.Service;
 
 import com.infy.customer.dto.CustomerDto;
@@ -19,6 +20,8 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	private static final Object lock = new Object();
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -43,34 +46,49 @@ public class CustomerServiceImpl implements CustomerService {
 	public List<CustomerDto> getAllCustomer() throws CustomerException {
 	    Iterable<Customer> allCustomer = customerRepository.findAll();
 	    
-	    if (allCustomer == null || !allCustomer.iterator().hasNext()) {
-	        throw new CustomerException("No customers found");
-	    }
+        try {
+        	
+//        	// c) inject a bug by causing an out of memory in the application when dealing with some reports
+//        	
+//        	List<String> memo = new ArrayList<>();
+//            for (int i = 0; i < 100_000_000; i++)
+//                memo.add("Record " + i);
+//            
+//            if (allCustomer == null || !allCustomer.iterator().hasNext()) {
+//            	throw new CustomerException("No customers found");
+//            }
 
-	    List<CustomerDto> customerDtoList = new ArrayList<>();
-	    for (Customer customer : allCustomer) {
-	        CustomerDto customerDto = new CustomerDto();
-	        customerDto.setId(customer.getId());
-	        customerDto.setName(customer.getName());
-	        customerDto.setEmail(customer.getEmail());
-	        customerDto.setAddress(customer.getAddress());
-	        customerDto.setPhoneNumber(customer.getPhoneNumber());
-	        customerDto.setCreatedAt(customer.getCreatedAt());
-	        customerDto.setUpdatedAt(customer.getUpdatedAt());
-	        customerDtoList.add(customerDto);
-	    }
+            List<CustomerDto> customerDtoList = new ArrayList<>();
+            for (Customer customer : allCustomer) {
+            	CustomerDto customerDto = new CustomerDto();
+            	customerDto.setId(customer.getId());
+            	customerDto.setName(customer.getName());
+            	customerDto.setEmail(customer.getEmail());
+            	customerDto.setAddress(customer.getAddress());
+            	customerDto.setPhoneNumber(customer.getPhoneNumber());
+            	customerDto.setCreatedAt(customer.getCreatedAt());
+            	customerDto.setUpdatedAt(customer.getUpdatedAt());
+            	customerDtoList.add(customerDto);
+            }
 
-	    return customerDtoList;
+            return customerDtoList;
+        }catch(OutOfMemoryError e) {
+        	throw e;
+        }
 	}
 
 	@Override
-    public CustomerDto getCustomerById(Long customerId) throws CustomerException{
-        Optional<Customer> customerOpt = customerRepository.findById(customerId);
-        if (customerOpt.isPresent()) {
-            return modelMapper.map(customerOpt.get(), CustomerDto.class);
-        } else {
-            throw new CustomerException("Customer not found with id: " + customerId);
-        }
+    public CustomerDto getCustomerById(Long customerId) throws CustomerException, InterruptedException{
+//		// b) inject a bug in the application to cause a latency due to a synchronized code
+//		synchronized(lock) {
+//			Thread.sleep(10000);
+			Optional<Customer> customerOpt = customerRepository.findById(customerId);
+        	if (customerOpt.isPresent()) {
+            	return modelMapper.map(customerOpt.get(), CustomerDto.class);
+        	} else {
+            	throw new CustomerException("Customer not found with id: " + customerId);
+        	}
+//		}
     }
 	
 }

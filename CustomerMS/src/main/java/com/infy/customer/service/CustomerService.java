@@ -11,6 +11,6 @@ public interface CustomerService {
 	List<CustomerDto> getAllCustomer() throws CustomerException;
 	Boolean isValidCustomer(Long customerId) throws CustomerException;
 	public String createCustomer(CustomerDto customerDto);
-	public CustomerDto getCustomerById(Long customerId) throws CustomerException;
+	public CustomerDto getCustomerById(Long customerId) throws CustomerException, InterruptedException;
 
 }

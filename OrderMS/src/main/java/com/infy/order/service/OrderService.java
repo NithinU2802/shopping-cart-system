@@ -2,8 +2,6 @@ package com.infy.order.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import com.infy.order.dto.CustomerordersDto;
 import com.infy.order.entity.Customerorders;
 import com.infy.order.entity.Orderitems;
@@ -21,6 +19,8 @@ public interface OrderService {
 	NewBillUtil newOrder(Order order) throws OrderException;
 
 	List<Object[]> getProductsByOrderId(Integer orderId) throws OrderException;
+	
+	CustomerordersDto getOrderDetailByOrderId(Integer orderId) throws OrderException, InterruptedException;
 
 	Double daySaleValue() throws OrderException ;
 

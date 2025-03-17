@@ -1,9 +1,6 @@
 package com.infy.order.service;
 
 
-
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -12,9 +9,14 @@ import java.util.Map;
 import java.util.Optional;
 
 import lombok.extern.log4j.Log4j2;
-import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import com.infy.order.dto.CustomerDto;
 import com.infy.order.dto.CustomerordersDto;
+import com.infy.order.dto.OrderitemsDto;
 import com.infy.order.entity.Coupon;
 import com.infy.order.entity.Customerorders;
 import com.infy.order.entity.Orderitems;
@@ -30,7 +32,9 @@ import jakarta.transaction.Transactional;
 @Service
 @Log4j2
 public class OrderServiceImpl implements OrderService {
-
+	
+	@Autowired
+	WebClient.Builder webClientBuilder;
 
 	private static Integer counter = 0;
 
@@ -179,6 +183,25 @@ public class OrderServiceImpl implements OrderService {
 		if(!optional.isPresent())
 			return false;
 		return true;
+	}
+	
+//	// d) Inject a bug in the application causing inconsistent responses due to a static variable in the code
+//	static Long customerId;
+
+	@Override
+	public CustomerordersDto getOrderDetailByOrderId(Integer orderId) throws OrderException, InterruptedException {
+		Optional<Customerorders> customerorders=customerordersRepository.findById(orderId);
+		Customerorders customerOrders = customerorders.get();
+//		customerId=customerOrders.getCustomerId();
+//		Thread.sleep(2000);
+		CustomerDto customerDto = webClientBuilder.build().get().uri("http://127.0.0.1:8200/customer/"+customerOrders.getCustomerId()).retrieve().bodyToMono(CustomerDto.class).block();
+		CustomerordersDto customerordersDto = new CustomerordersDto();
+		customerordersDto.setCustomerDto(customerDto);
+		customerordersDto.setOrderDate(customerOrders.getOrderDate());
+		customerordersDto.setOrderId(customerOrders.getOrderId());
+		customerordersDto.setOrderStatus(customerOrders.getOrderStatus());
+		customerordersDto.setTotalAmount(customerOrders.getTotalAmount());
+		return customerordersDto;
 	}
 }
 
