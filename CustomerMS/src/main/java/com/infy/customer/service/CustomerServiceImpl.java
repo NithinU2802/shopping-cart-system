@@ -3,6 +3,8 @@ package com.infy.customer.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.infy.customer.dto.CustomerDto;
 import com.infy.customer.entity.Customer;
 import com.infy.customer.exception.CustomerException;
 import com.infy.customer.repository.CustomerRepository;
+import com.infy.customer.utility.ThreadDumpUtil;
 
 
 @Service
@@ -89,6 +92,32 @@ public class CustomerServiceImpl implements CustomerService {
             	throw new CustomerException("Customer not found with id: " + customerId);
         	}
 //		}
+    }
+	
+	
+	// Make some concurrent transactions for different users in the solution and take thread dumps while doing 
+	// those transactions 
+	
+	private ExecutorService executorService = Executors.newFixedThreadPool(10); 
+	
+	public String simulateConcurrentTransactions(List<CustomerDto> customerDtos) {
+        for (CustomerDto customerDto : customerDtos) {
+            executorService.submit(() -> {
+                // Simulating a transaction: saving user to the database
+                createCustomer(customerDto);
+
+                // Trigger thread dump (this will print thread info to the console)
+                triggerThreadDump();
+            });
+        }
+        
+        return "Check the console where concurrent transaction has been done";
+    }
+
+
+    // Trigger a thread dump to the console
+    private void triggerThreadDump() {
+        ThreadDumpUtil.printThreadDump();
     }
 	
 }

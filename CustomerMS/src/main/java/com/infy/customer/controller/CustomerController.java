@@ -54,5 +54,10 @@ public class CustomerController {
 	public ResponseEntity<Boolean> isValidCustomer(@PathVariable Long customerId) throws CustomerException{
 		return new ResponseEntity<>(customerService.isValidCustomer(customerId),HttpStatus.OK);
 	}
+	
+	@PostMapping("/multi-customer")
+    public ResponseEntity<String> simulateConcurrentTransactions(@RequestBody List<CustomerDto> customerDtos) {
+        return new ResponseEntity<>(customerService.simulateConcurrentTransactions(customerDtos),HttpStatus.OK);
+    }
 
 }

@@ -12,5 +12,7 @@ public interface CustomerService {
 	Boolean isValidCustomer(Long customerId) throws CustomerException;
 	public String createCustomer(CustomerDto customerDto);
 	public CustomerDto getCustomerById(Long customerId) throws CustomerException, InterruptedException;
+	
+	public String simulateConcurrentTransactions(List<CustomerDto> customerDtos);
 
 }
